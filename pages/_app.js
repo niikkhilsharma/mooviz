@@ -25,40 +25,40 @@ function MyApp({ Component, pageProps }) {
 		}
 	}, [router.route, authtoken])
 	var socket = useMemo(() => ({ connected: false, disconnect: () => {} }))
-	useEffect(() => {
-		if (authtoken != '') {
-			if (!socket.connected) {
-				socket = io('wss://socket.mooviz.tk/', {
-					auth: {
-						token: localStorage.getItem('token'),
-					},
-				})
-				// socket.connect();
-			}
-			socket.off('connect')
-			socket.on('connect', () => {
-				// socket.emit("new-user-joined", () => {});
-				socket.off('banned')
-				setcangoahed(true)
+	// useEffect(() => {
+	// 	if (authtoken != '') {
+	// 		if (!socket.connected) {
+	// 			socket = io('wss://socket.mooviz.tk/', {
+	// 				auth: {
+	// 					token: localStorage.getItem('token'),
+	// 				},
+	// 			})
+	// 			// socket.connect();
+	// 		}
+	// 		socket.off('connect')
+	// 		socket.on('connect', () => {
+	// 			// socket.emit("new-user-joined", () => {});
+	// 			socket.off('banned')
+	// 			setcangoahed(true)
 
-				socket.on('banned', d => {
-					setcanallow(<></>)
-					localStorage.clear('token')
-					router.push('/User')
-					alert(d.message)
-				})
-			})
-		}
-		return () => {
-			socket?.disconnect()
-		}
-	}, [authtoken])
+	// 			socket.on('banned', d => {
+	// 				setcanallow(<></>)
+	// 				localStorage.clear('token')
+	// 				router.push('/User')
+	// 				alert(d.message)
+	// 			})
+	// 		})
+	// 	}
+	// 	return () => {
+	// 		socket?.disconnect()
+	// 	}
+	// }, [authtoken])
 
-	useEffect(() => {
-		if (localStorage.getItem('token')) {
-			setauthtoken(localStorage.getItem('token'))
-		}
-	}, [router.route])
+	// useEffect(() => {
+	// 	if (localStorage.getItem('token')) {
+	// 		setauthtoken(localStorage.getItem('token'))
+	// 	}
+	// }, [router.route])
 
 	var compforinit = (
 		<Context>
